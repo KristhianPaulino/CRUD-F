@@ -1,0 +1,171 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12 offset-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="Titulo">CRUD DATA BASE</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="Titulo">Create</h3>
+
+                <form [formGroup]="form" (ngSubmit)="Save()">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input formControlName="Nombres" type="text" class="form-control" placeholder="Nombres">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+                        <input formControlName="Apellidos" type="text" class="form-control" placeholder="Apellidos">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-sharp fa-solid fa-location-dot"></i>
+                        </span>
+                        <input formControlName="Direccion" type="text" class="form-control" placeholder="Direccion">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <input formControlName="Telefono" type="text" class="form-control" placeholder="Telefono">
+                    </div>
+                
+
+                <div class="d-grid gap-2">
+
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-registered"></i>&nbsp; Registrar</button>
+
+                </div>
+
+            </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="Titulo">Update</h5>
+
+                <form>
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Nombre">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Apellido">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-sharp fa-solid fa-location-dot"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Direccion">
+                    </div>
+
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Telefono">
+                    </div>
+
+
+                </form>
+
+                <div class="d-grid gap-2">
+
+                    <button [disabled] type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-rotate-right"></i>&nbsp; Actulizar</button>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="Titulo">Read</h5>
+                <form [formGroup]="form">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input formControlName="IDaConsultar" type="text" class="form-control" placeholder="ID a consultar">
+                    </div>
+                                                               
+                
+                <div class="d-grid gap-2">
+
+                    <button [disabled] type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-database"></i>&nbsp; Consultar</button>
+
+                </div>
+
+            </form>
+
+
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="Titulo">Delete</h5>
+
+                <form>
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-xmark"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="ID a eliminar">
+                    </div>
+                </form>
+
+                <div class="d-grid gap-2">
+
+                    <button [disabled] type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-sharp fa-solid fa-trash"></i>&nbsp; Eliminar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
