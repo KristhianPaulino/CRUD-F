@@ -16,21 +16,21 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h3 class="Titulo">Create</h3>
+                <h3 class="Titulo">{{ accion | uppercase}} USUARIO</h3>
 
-                <form [formGroup]="form" (ngSubmit)="Save()">
+                <form [formGroup]="form" (ngSubmit)="guardarUser()">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="fa-solid fa-user"></i>
                         </span>
-                        <input formControlName="Nombres" type="text" class="form-control" placeholder="Nombres">
+                        <input formControlName="Nombre" type="text" class="form-control" placeholder="Nombres">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="fa-regular fa-user"></i>
                         </span>
-                        <input formControlName="Apellidos" type="text" class="form-control" placeholder="Apellidos">
+                        <input formControlName="Apellido" type="text" class="form-control" placeholder="Apellidos">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
@@ -46,16 +46,16 @@
                         </span>
                         <input formControlName="Telefono" type="text" class="form-control" placeholder="Telefono">
                     </div>
-                
 
-                <div class="d-grid gap-2">
 
-                    <button type="submit" class="btn btn-success btn-lg">
-                        <i class="fa-solid fa-registered"></i>&nbsp; Registrar</button>
+                    <div class="d-grid gap-2">
 
-                </div>
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fa-solid fa-registered"></i>&nbsp; Aceptar</button>
 
-            </form>
+                    </div>
+
+                </form>
 
 
             </div>
@@ -66,46 +66,20 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="Titulo">Update</h5>
+                <h5 class="Titulo">Usuarios</h5>
+                <table class="table">
+                    <tbody>
 
-                <form>
-                    <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Nombre">
-                    </div>
+                        <tr *ngFor="let save of listCRUD">
+                            <td>{{ save.nombre }} </td>
+                            <td>{{ save.apellido }}</td>
+                            <td>{{ save.direccion }}</td>                            
+                            <td>{{ save.telefono }}</td>
+                            <td><i (click)="actualizarUser(save)" class="cursorPointer fa-regular fa-pen-to-square text-info"></i></td>
+                        </tr>
 
-                    <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-regular fa-user"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Apellido">
-                    </div>
-
-                    <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-sharp fa-solid fa-location-dot"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Direccion">
-                    </div>
-
-                    <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-phone"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Telefono">
-                    </div>
-
-
-                </form>
-
-                <div class="d-grid gap-2">
-
-                    <button [disabled] type="submit" class="btn btn-success btn-lg">
-                        <i class="fa-solid fa-rotate-right"></i>&nbsp; Actulizar</button>
-
-                </div>
+                    </tbody>
+                </table>
 
 
 
@@ -119,28 +93,29 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="Titulo">Read</h5>
-                <form [formGroup]="form">
+                <form [formGroup]="form" (ngSubmit)="ConsultarById(IDconsultar)">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="fa-solid fa-user"></i>
                         </span>
-                        <input formControlName="IDaConsultar" type="text" class="form-control" placeholder="ID a consultar">
+                        <input formControlName="IDaConsultar" type="number" [(ngModel)]="IDconsultar" class="form-control"
+                            placeholder="ID a consultar">
                     </div>
-                                                               
-                
-                <div class="d-grid gap-2">
 
-                    <button [disabled] type="submit" class="btn btn-success btn-lg">
-                        <i class="fa-solid fa-database"></i>&nbsp; Consultar</button>
 
-                </div>
+                    <div class="d-grid gap-2">
 
-            </form>
+                        <button [disabled] type="submit" class="btn btn-success btn-lg">
+                            <i class="fa-solid fa-database"></i>&nbsp; Consultar</button>
+
+                    </div>
+
+                </form>
 
 
             </div>
 
-            
+
         </div>
     </div>
 
@@ -149,22 +124,23 @@
             <div class="card-body">
                 <h5 class="Titulo">Delete</h5>
 
-                <form>
+                <form [formGroup]="form" (ngSubmit)="Eliminar(IDeliminar)">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="fa-solid fa-xmark"></i>
                         </span>
-                        <input type="text" class="form-control" placeholder="ID a eliminar">
+                        <input formControlName="IDaEliminar" type="number" class="form-control" [(ngModel)]="IDeliminar" placeholder="ID a eliminar" >
+                    </div>
+
+
+                    <div class="d-grid gap-2">
+
+                        <button [disabled] type="submit" class="btn btn-success btn-lg">
+                            <i class="fa-sharp fa-solid fa-trash"></i>&nbsp; Eliminar
+                        </button>
+
                     </div>
                 </form>
-
-                <div class="d-grid gap-2">
-
-                    <button [disabled] type="submit" class="btn btn-success btn-lg">
-                        <i class="fa-sharp fa-solid fa-trash"></i>&nbsp; Eliminar
-                    </button>
-
-                </div>
             </div>
         </div>
     </div>

@@ -7,8 +7,8 @@ background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, F
 }
 
 .Titulo{
-    font-family: 'Josefin Sans', sans-serif;
-font-family: 'Lobster Two', cursive;
-font-family: 'Smokum', cursive;
-text-align:  center;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
+
+    text-align: center;
 }

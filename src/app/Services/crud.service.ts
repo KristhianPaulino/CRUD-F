@@ -21,11 +21,15 @@ export class CRUDService {
     return this.http.get(this.myAppUrl + this.MyApiUrl + 'Get')
   }
 
-  DeteleID(id: number): Observable<any> {
-    return this.http.delete(this.myAppUrl + this.MyApiUrl + 'DELETE/' + id)
+  DeteleID(ID: number): Observable<any> {    
+    return this.http.delete(this.myAppUrl + this.MyApiUrl + 'DELETE/' + ID)
   }
   
   SaveUser(save: any):Observable<any>{
     return this.http.post(this.myAppUrl + this.MyApiUrl, save);
+  }
+
+  UpdateID(ID : number, save: any):Observable<any>{
+    return this.http.put(this.myAppUrl + this.MyApiUrl + ID, save);
   }
 }

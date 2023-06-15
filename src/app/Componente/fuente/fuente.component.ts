@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CRUDService } from 'src/app/Services/crud.service';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-fuente',
@@ -10,59 +13,90 @@ import { CRUDService } from 'src/app/Services/crud.service';
 })
 export class FuenteComponent {
 
-  
+  IDconsultar: any;
+  IDeliminar: any;
+  accion = 'Crear';
+  ID: number | undefined;
 
   ngOnInit(): void {
     
-     
+    this.ConsultarTodo();
     
-  }
+    
+  } 
    
   listCRUD: any[] = [];
   form: FormGroup;
   
+ 
   
 
-  constructor(private fb: FormBuilder,
+  constructor( private fb: FormBuilder,   
     private toastr: ToastrService,
-    private _CRUDservice: CRUDService ){
+    private _CRUDservice: CRUDService ){         
     this.form = this.fb.group({
-      Nombres: [''],
-      Apellidos: [''],
+      Nombre: [''],
+      Apellido: [''],
       Direccion: [''],
       Telefono: [''],
-      IDaConsultar: ['']         
+      IDaConsultar: [''],
+      IDaEliminar:['']       
     })
+
+    
 
   }
 
-  Save(){
-
-    console.log(this.form.value)
-  
+  guardarUser(){
+         
   const save: any = {
-    Nombres: this.form.get('Nombres')?.value,
-    Apellidos: this.form.get('Apellidos')?.value,
+    Nombre: this.form.get('Nombre')?.value,
+    Apellido: this.form.get('Apellido')?.value,
     Direccion: this.form.get('Direccion')?.value,
     Telefono: this.form.get('Telefono')?.value,
 
   }
-  this._CRUDservice.SaveUser(save).subscribe(data =>{
-    this.toastr.success('Usuario registrado con exito', ':)');    
-    this.form.reset();
-    console.log(save);
-  }, error =>{
-    this.toastr.error('Opps... Ocurrio un error','ERROR')
-    console.log(error);
-  })
+
+  if(this.ID == undefined){
+    //Si no tiene valor en el ID quiere decir que es nueva tarjeta, asi que agregamos.
+    this._CRUDservice.SaveUser(save).subscribe(data =>{
+      this.toastr.success('Usuario registrado con exito', ':)');    
+      this.form.reset();
+      this.ConsultarTodo();
+      console.log(save);
+    }, error =>{
+      this.toastr.error('Opps... Ocurrio un error','ERROR')
+      console.log(error);
+    })
+  }
+
+  else{
+    //Si tiene valor en el ID quiere decir que vamos a editar.
+    save.id = this.ID;
+    this._CRUDservice.UpdateID(this.ID, save).subscribe(data =>{
+      this.form.reset();
+      this.accion = 'Agregar';
+      this.ID = undefined;
+      this.toastr.info('La tarjeta fue actualizada con exito!', 'Tarjeta Actualizada');
+      this.ConsultarTodo();
+    },error => {
+      console.log(error);
+    })
+    
+  }
+
+ 
 
       
   }
  
 
  ConsultarById(ID: number){
+
+  
     this._CRUDservice.ConsultID(ID).subscribe(data =>{
      this.toastr.success('ID CONSULTADO', ':)')
+     this.form.reset();
      console.log(data);
     }, error => {
       console.log(error);
@@ -72,28 +106,37 @@ export class FuenteComponent {
 }
 
 ConsultarTodo(){
+
+  
   this._CRUDservice.Consultar().subscribe(data =>{
-    this.toastr.success('Datos Consultados', ':)')
+    console.log(data);
+    this.listCRUD = data;    
     console.log(data)
   })
 } 
 
-Eliminar(id: number){
-  this._CRUDservice.DeteleID(id).subscribe(data =>{
+Eliminar(ID: number){
+  this._CRUDservice.DeteleID(ID).subscribe(data =>{
     this.toastr.error('Id Eliminado', ':(')
+    this.form.reset();
     console.log(data)
   })
 }
 
+actualizarUser(save: any){
+this.accion = 'Editar';
+this.ID = save.id;
+console.log(save);
 
+this.form.patchValue({
 
- 
-
-    
-  
-
-
-
+  Nombre: save.nombre,
+  Apellido: save.apellido,
+  Direccion: save.direccion,
+  Telefono: save.telefono
+})
+}
+       
 
 
 }
