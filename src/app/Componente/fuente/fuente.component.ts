@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CRUDService } from 'src/app/Services/crud.service';
-import { CommonModule } from '@angular/common';
+
 
 
 
@@ -12,11 +12,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./fuente.component.css']
 })
 export class FuenteComponent {
+   
+  
 
   IDconsultar: any;
   IDeliminar: any;
   accion = 'Crear';
   ID: number | undefined;
+  showInDispay: any;
 
   ngOnInit(): void {
     
@@ -35,12 +38,12 @@ export class FuenteComponent {
     private toastr: ToastrService,
     private _CRUDservice: CRUDService ){         
     this.form = this.fb.group({
-      Nombre: [''],
-      Apellido: [''],
-      Direccion: [''],
-      Telefono: [''],
-      IDaConsultar: [''],
-      IDaEliminar:['']       
+      Nombre: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(3)]],
+      Apellido: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(3)]],
+      Direccion: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(3)]],
+      Telefono: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(10)]],
+      IDaConsultar: ['', [Validators.required, Validators.maxLength(5), Validators.minLength(1)]],
+      IDaEliminar:['', [Validators.required, Validators.maxLength(5), Validators.minLength(1)]]       
     })
 
     
@@ -97,7 +100,7 @@ export class FuenteComponent {
     this._CRUDservice.ConsultID(ID).subscribe(data =>{
      this.toastr.success('ID CONSULTADO', ':)')
      this.form.reset();
-     console.log(data);
+     console.log(data);     
     }, error => {
       console.log(error);
     

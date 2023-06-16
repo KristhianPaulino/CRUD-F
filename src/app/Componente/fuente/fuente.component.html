@@ -21,30 +21,34 @@
                 <form [formGroup]="form" (ngSubmit)="guardarUser()">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-user"></i>
+                            <i class="fa-solid fa-user" [class.green-icon]="this.form.get('Nombre')?.valid"
+                            [class.red-icon]="this.form.get('Nombre')?.invalid && this.form.get('Nombre')?.touched"></i>
                         </span>
-                        <input formControlName="Nombre" type="text" class="form-control" placeholder="Nombres">
+                        <input formControlName="Nombre" type="text" maxlength="16" class="form-control" placeholder="Nombres">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-regular fa-user"></i>
+                            <i class="fa-regular fa-user" [class.green-icon]="this.form.get('Apellido')?.valid"
+                            [class.red-icon]="this.form.get('Apellido')?.invalid && this.form.get('Apellido')?.touched"></i>
                         </span>
-                        <input formControlName="Apellido" type="text" class="form-control" placeholder="Apellidos">
+                        <input formControlName="Apellido" type="text" maxlength="16" class="form-control" placeholder="Apellidos">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-sharp fa-solid fa-location-dot"></i>
+                            <i class="fa-sharp fa-solid fa-location-dot" [class.green-icon]="this.form.get('Direccion')?.valid"
+                            [class.red-icon]="this.form.get('Direccion')?.invalid && this.form.get('Direccion')?.touched"></i>
                         </span>
-                        <input formControlName="Direccion" type="text" class="form-control" placeholder="Direccion">
+                        <input formControlName="Direccion" type="text" maxlength="20" class="form-control" placeholder="Direccion">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-solid fa-phone" [class.green-icon]="this.form.get('Telefono')?.valid"
+                            [class.red-icon]="this.form.get('Telefono')?.invalid && this.form.get('Telefono')?.touched"></i>
                         </span>
-                        <input formControlName="Telefono" type="text" class="form-control" placeholder="Telefono">
+                        <input formControlName="Telefono" type="text" maxlength="11" class="form-control" placeholder="Telefono">
                     </div>
 
 
@@ -71,6 +75,7 @@
                     <tbody>
 
                         <tr *ngFor="let save of listCRUD">
+                            <td>ID:{{save.id}}</td>
                             <td>{{ save.nombre }} </td>
                             <td>{{ save.apellido }}</td>
                             <td>{{ save.direccion }}</td>                            
@@ -96,9 +101,10 @@
                 <form [formGroup]="form" (ngSubmit)="ConsultarById(IDconsultar)">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-user"></i>
+                            <i class="fa-solid fa-user" [class.green-icon]="this.form.get('IDaConsultar')?.valid"
+                            [class.red-icon]="this.form.get('IDaConsultar')?.invalid && this.form.get('IDaConsultar')?.touched"></i>
                         </span>
-                        <input formControlName="IDaConsultar" type="number" [(ngModel)]="IDconsultar" class="form-control"
+                        <input formControlName="IDaConsultar" maxlength="5" type="number" [(ngModel)]="IDconsultar" class="form-control"
                             placeholder="ID a consultar">
                     </div>
 
@@ -106,7 +112,7 @@
                     <div class="d-grid gap-2">
 
                         <button [disabled] type="submit" class="btn btn-success btn-lg">
-                            <i class="fa-solid fa-database"></i>&nbsp; Consultar</button>
+                            <i class="fa-solid fa-database" ></i>&nbsp; Consultar</button>
 
                     </div>
 
@@ -127,9 +133,10 @@
                 <form [formGroup]="form" (ngSubmit)="Eliminar(IDeliminar)">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-xmark"></i>
+                            <i class="fa-solid fa-xmark" [class.green-icon]="this.form.get('IDaEliminar')?.valid"
+                            [class.red-icon]="this.form.get('IDaEliminar')?.invalid && this.form.get('IDaEliminar')?.touched"></i>
                         </span>
-                        <input formControlName="IDaEliminar" type="number" class="form-control" [(ngModel)]="IDeliminar" placeholder="ID a eliminar" >
+                        <input formControlName="IDaEliminar" type="number" maxlength="5" class="form-control" [(ngModel)]="IDeliminar" placeholder="ID a eliminar" >
                     </div>
 
 
@@ -142,6 +149,34 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+<br/>    
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="Titulo">Consultado</h5>
+            <table class="table">
+                <tbody>
+
+                        <tr *ngFor="let consult of listCRUD">
+                            <td>{{consult.id}}</td>
+                            <td>{{ consult.nombre }} </td>
+                            <td>{{ consult.apellido }}</td>
+                            <td>{{ consult.direccion }}</td>                            
+                            <td>{{ consult.telefono }}</td>                            
+                        </tr>
+                    
+
+                    
+
+                </tbody>
+            </table>
+
+
+
         </div>
     </div>
 </div>
