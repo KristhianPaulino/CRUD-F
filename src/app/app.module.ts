@@ -7,6 +7,10 @@ import { FuenteComponent } from './Componente/fuente/fuente.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
+
 
 
 
@@ -16,7 +20,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     FuenteComponent,
-    FuenteComponent,    
+    FuenteComponent,  
+    
+     
+    
   ],
   imports: [
     BrowserModule,
@@ -25,7 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule,
+    
+    
 
   ],
   providers: [],

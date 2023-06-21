@@ -74,7 +74,7 @@
                 <table class="table">
                     <tbody>
 
-                        <tr *ngFor="let save of listCRUD">
+                        <tr *ngFor="let save of listCRUD | paginate: { itemsPerPage: 5, currentPage: currentPage}">
                             <td>ID:{{save.id}}</td>
                             <td>{{ save.nombre }} </td>
                             <td>{{ save.apellido }}</td>
@@ -82,9 +82,10 @@
                             <td>{{ save.telefono }}</td>
                             <td><i (click)="actualizarUser(save)" class="cursorPointer fa-regular fa-pen-to-square text-info"></i></td>
                         </tr>
-
+                        
                     </tbody>
                 </table>
+                <pagination-controls (pageChange)="currentPage = $event" ></pagination-controls>
 
 
 
@@ -92,6 +93,7 @@
         </div>
     </div>
 </div>
+
 <br />
 <div class="row">
     <div class="col-lg-6">
@@ -124,7 +126,13 @@
 
         </div>
     </div>
+</div>
 
+
+
+<br>
+<div>
+<div class="row">
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
@@ -147,36 +155,12 @@
                         </button>
 
                     </div>
+                    
                 </form>
+            </div>
             </div>
         </div>
     </div>
-</div>
-<br/>    
 
-<div class="col-lg-12">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="Titulo">Consultado</h5>
-            <table class="table">
-                <tbody>
-
-                        <tr *ngFor="let consult of listCRUD">
-                            <td>{{consult.id}}</td>
-                            <td>{{ consult.nombre }} </td>
-                            <td>{{ consult.apellido }}</td>
-                            <td>{{ consult.direccion }}</td>                            
-                            <td>{{ consult.telefono }}</td>                            
-                        </tr>
-                    
-
-                    
-
-                </tbody>
-            </table>
-
-
-
-        </div>
     </div>
-</div>
+   

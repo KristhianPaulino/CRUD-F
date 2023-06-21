@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CRUDService } from 'src/app/Services/crud.service';
+import {  PaginationService } from 'ngx-pagination';
+
 
 
 
@@ -14,13 +16,12 @@ import { CRUDService } from 'src/app/Services/crud.service';
 export class FuenteComponent {
    
   
-
+  
   IDconsultar: any;
   IDeliminar: any;
   accion = 'Crear';
   ID: number | undefined;
-  showInDispay: any;
-
+  
   ngOnInit(): void {
     
     this.ConsultarTodo();
@@ -30,14 +31,19 @@ export class FuenteComponent {
    
   listCRUD: any[] = [];
   form: FormGroup;
+  currentPage: number = 1;
+  
+  
   
  
   
 
   constructor( private fb: FormBuilder,   
     private toastr: ToastrService,
-    private _CRUDservice: CRUDService ){         
+    private _CRUDservice: CRUDService,
+    paginationService: PaginationService ){         
     this.form = this.fb.group({
+      
       Nombre: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(3)]],
       Apellido: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(3)]],
       Direccion: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(3)]],
@@ -122,6 +128,7 @@ Eliminar(ID: number){
   this._CRUDservice.DeteleID(ID).subscribe(data =>{
     this.toastr.error('Id Eliminado', ':(')
     this.form.reset();
+    this.ConsultarTodo();
     console.log(data)
   })
 }
